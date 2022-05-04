@@ -1,0 +1,144 @@
+{
+  "tickets": [
+    {
+      "subject": "Ticket 1",
+      "assignee": "heny",
+      "requestedBy": "meera",
+      "priority": "high",
+      "status": "open",
+      "createdDate": "2022-04-01",
+      "dueDate": "2022-04-28",
+      "id": 1
+    },
+    {
+      "subject": "Ticket2",
+      "assignee": "meera",
+      "requestedBy": "heny",
+      "priority": "high",
+      "status": "closed",
+      "createdDate": "2022-04-14",
+      "dueDate": "2022-04-29",
+      "id": 2
+    },
+    {
+      "subject": "Ticket 3",
+      "assignee": "meera",
+      "requestedBy": "jisa",
+      "priority": "high",
+      "status": "closed",
+      "createdDate": "2022-04-01",
+      "dueDate": "2022-04-29",
+      "id": 3
+    },
+    {
+      "subject": "Tetsing",
+      "assignee": "heny",
+      "requestedBy": "meera",
+      "priority": "medium",
+      "status": "closed",
+      "createdDate": "2022-04-01",
+      "dueDate": "2022-04-14",
+      "id": 4
+    },
+    {
+      "subject": "Ticket 1",
+      "assignee": "meera",
+      "requestedBy": "jisa",
+      "priority": "high",
+      "status": "closed",
+      "createdDate": "2022-04-21",
+      "dueDate": "2022-04-29",
+      "id": 5
+    },
+    {
+      "subject": "Ticket 3",
+      "assignee": "riya",
+      "requestedBy": "jiya",
+      "priority": "medium",
+      "status": "open",
+      "createdDate": "2022-04-20",
+      "dueDate": "2022-04-27",
+      "id": 6
+    },
+    {
+      "subject": "Ticket 5",
+      "assignee": "riya",
+      "requestedBy": "meera",
+      "priority": "low",
+      "status": "open",
+      "createdDate": "2022-04-24",
+      "dueDate": "2022-04-30",
+      "id": 7
+    },
+    {
+      "subject": "Tetsing",
+      "assignee": "riya",
+      "requestedBy": "jiya",
+      "priority": "medium",
+      "status": "closed",
+      "createdDate": "2022-04-21",
+      "dueDate": "2022-04-22",
+      "id": 8
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Research",
+      "task": [
+        {
+          "id": 1,
+          "taskName": "Task 1",
+          "taskDesc":
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+          "assignee": "User 1",
+          "category": "research",
+          "createdDate": "2022-04-21",
+          "createdBy": "Binal Lad"
+        },
+        {
+          "id": 2,
+          "taskName": "Task 2",
+          "taskDesc":
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+          "assignee": "User 2",
+          "category": "planning",
+          "createdDate": "2022-04-21",
+          "createdBy": "Binal Lad"
+        }
+      ]
+    },
+    {
+      "title": "Todo",
+      "task": [
+        {
+          "id": 3,
+          "taskName": "Task 3",
+          "taskDesc":
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+          "assignee": "User 3",
+          "category": "design",
+          "createdDate": "2022-04-21",
+          "createdBy": "Binal Lad"
+        },
+        {
+          "id": 4,
+          "taskName": "Task 4",
+          "taskDesc":
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+          "assignee": "User 4",
+          "category": "research",
+          "createdDate": "2022-04-21",
+          "createdBy": "Binal Lad"
+        }
+      ]
+    },
+    {
+      "title": "In Progress",
+      "task": []
+    },
+    {
+      "title": "Needs Review",
+      "task": []
+    }
+  ]
+}
