@@ -1,6 +1,8 @@
 <template>
   <TasksListPresentation
+    v-if="isShow"
     :taskListData="taskList"
+    @updateTaskList="updateTaskList($event)"
   />
 </template>
 
@@ -9,6 +11,7 @@ import { defineComponent } from "vue";
 import { TaskConstants } from "@/tasks/constants";
 import TasksListPresentation from "@/tasks/component/tasks-list-container/tasks-list-presentation/tasks-list.presentation.vue";
 import { TaskServices } from "@/tasks/services/tasks.service";
+import store from "@/tasks/store";
 
 export default defineComponent({
   name: TaskConstants.NAME.TASKS_LIST_CONTAINER,
@@ -18,12 +21,46 @@ export default defineComponent({
   data() {
     return {
       taskList: new Array<any>(),
+      isShow: false,
     };
   },
-  async created() {
-    await TaskServices.getTasks().then((response) => {
-      this.taskList = response;
-    });
+  computed: {
+    getUpdatedData() {
+      return store.getters.getTaskList;
+    },
+  },
+  watch: {
+    getUpdatedData(newValue) {
+      if (newValue) {
+        this.getTaskList();
+      }
+    },
+  },
+  created() {
+    this.getTaskList();
+  },
+  methods: {
+    // Load Task Data
+    async getTaskList() {
+      await TaskServices.getTasks().then((response) => {
+        this.taskList = response;
+        this.isShow = true;
+      });
+    },
+
+    // Update Task List while Drag and Drop Task
+    updateTaskList(taskDetail: any) {
+      const taskId = taskDetail.taskId;
+      const status = taskDetail.columnId;
+
+      TaskServices.getTaskById(taskId).then((taskResponse) => {
+        taskResponse.status = status;
+        store.dispatch("updateTaskList", false);
+        TaskServices.updateTaskPosition(taskId, taskResponse).then(() => {
+          store.dispatch("updateTaskList", true);
+        });
+      });
+    },
   },
 });
 </script>
