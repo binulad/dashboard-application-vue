@@ -13,8 +13,26 @@ const TaskConstants = {
     DEFAULT: "Task Listing",
   },
   API_URL: {
-    TASKS: "tasks"
+    TASKS: "test",
   },
+  STATUS:[
+    {
+      name: "Backlog",
+      value: 1
+    },
+    {
+      name: "To Do",
+      value: 2
+    },
+    {
+      name: "In Progress",
+      value: 3
+    },
+    {
+      name: "Needs Review",
+      value: 4
+    }
+  ],
 };
 
 export { TaskConstants };

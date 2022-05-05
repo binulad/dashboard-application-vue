@@ -11,8 +11,10 @@
   <div class="task-board__wrapper row">
     <div class="task-board col" v-for="(column, index) in columns" :key="index">
       <header class="d-flex align-items-center mb-2">
-        <div class="task-board__title">{{ column.title }}</div>
-        <span class="task-board__count">{{ column.task.length }}</span>
+        <div class="task-board__title">{{ column.name }}</div>
+        <span class="task-board__count">{{
+          filterTasks(column.value).length
+        }}</span>
         <button
           type="button"
           title="Add New"
@@ -24,8 +26,9 @@
       </header>
 
       <TasksCardPresentation
-        :taskList="column.task"
-        @taskListUpdate="updateTaskList($event)"
+        :taskList="filterTasks(column.value)"
+        :columnId="column.value"
+        @taskListDetail="taskListDetail($event)"
       />
     </div>
   </div>
@@ -37,6 +40,7 @@ import { defineComponent } from "vue";
 import { TaskConstants } from "@/tasks/constants";
 import TableActionContent from "@/components/TableActionContent.vue";
 import TasksCardPresentation from "@/tasks/component/tasks-list-container/tasks-list-presentation/task-card.presentation.vue";
+import { Status } from "@/tasks/model/tasks.model";
 
 export default defineComponent({
   name: TaskConstants.NAME.TASKS_LIST_PRESENTATION,
@@ -45,31 +49,66 @@ export default defineComponent({
     TasksCardPresentation,
   },
   props: ["taskListData"],
-  emits: ["isUpdateTaskList"],
+  emits: ["updateTaskList"],
   data() {
     return {
-      columns: new Array<any>(),
+      columns: TaskConstants.STATUS,
+      tasks: new Array<any>(),
     };
   },
   created() {
-    setTimeout(() => {
-      this.columns = this.taskListData;
-    }, 500);
+    this.loadListData(this.taskListData);
+  },
+  watch: {
+    taskListData(newValue) {
+      this.loadListData(newValue);
+    },
   },
   methods: {
+    // Load ListData
+    loadListData(taskData: any) {
+      this.tasks = taskData;
+    },
+
     // Method click while click on Add button
     onAddClick() {
       this.$router.push({ name: TaskConstants.ROUTE.ADD });
     },
 
     // Method called while adding new Task
-    addNewTask(index: number) {
+    addNewTask(index: any) {
       console.log(index);
     },
 
-    // Update Task List
-    updateTaskList(isUpdate: boolean) {
-      this.$emit("isUpdateTaskList", isUpdate);
+    // Get filter tasks
+    filterTasks(value: number) {
+      const taskArr = this.tasks.filter((item) => item.status == value);
+      return taskArr;
+    },
+
+    getStatus(data: number) {
+      let title;
+      switch (data) {
+        case Status.Backlog:
+          title = TaskConstants.STATUS[0].name;
+          break;
+        case Status.ToDo:
+          title = TaskConstants.STATUS[1].name;
+          break;
+        case Status.InProgress:
+          title = TaskConstants.STATUS[2].name;
+          break;
+        case Status.NeedReview:
+          title = TaskConstants.STATUS[3].name;
+          break;
+      }
+
+      return title;
+    },
+
+    // Update List
+    taskListDetail(details: any) {
+      this.$emit("updateTaskList", details);
     },
   },
 });

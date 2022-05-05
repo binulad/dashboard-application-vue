@@ -1,12 +1,12 @@
 <template>
-  <ul class="task-item__list" @dragover.prevent @drop="drop($event)">
+  <ul class="task-item__list" @dragover.prevent @drop="drop($event, columnId)">
     <li
       v-for="task in taskData"
       :key="task.id"
       class="task-item"
       :draggable="true"
       :id="task.id"
-      @dragstart="drag($event)"
+      @dragstart="drag($event, task.id)"
       @click.stop
       @dragover.prevent
     >
@@ -30,38 +30,33 @@ import store from "@/tasks/store";
 
 export default defineComponent({
   name: TaskConstants.NAME.TASKS_CARD_PRESENTATION,
-  props: ["taskList"],
-  emits: ["taskListUpdate"],
+  props: ["taskList", "columnId"],
+  emits: ["taskListDetail"],
   data() {
     return {
       taskData: new Array<any>(),
       dragElement: false,
     };
   },
-  async created() {
-    this.taskData = await this.taskList;
-  },
-  computed: {
-    isTaskListUpdate() {
-      return store.getters.getTaskList
-    }
-  },
-  watch: {
-    isTaskListUpdate(newValue) {
-      this.$emit("taskListUpdate", newValue);
-    },
+  created() {
+    this.taskData = this.taskList;
   },
   methods: {
     // Method called when drag element
-    drag(ev: any) {
-      ev.dataTransfer.setData("text", ev.target.id);
+    drag(ev: any, taskId: any) {
+      ev.dataTransfer.setData("taskId", taskId);
     },
 
     // Method called when drop element
-    drop(ev: any) {
-      const text: any = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(text));
-      store.dispatch("updateTaskList", true);
+    drop(ev: any, columnId: number) {
+      const taskId: any = ev.dataTransfer.getData("taskId");
+      ev.target.appendChild(document.getElementById(taskId));
+
+      const taskObj = {
+        taskId: taskId,
+        columnId: columnId,
+      };
+      this.$emit("taskListDetail", taskObj);
     },
   },
 });
