@@ -1,16 +1,32 @@
 import { Http } from "@/services/http-client";
-import { TicketsAdapter, TicketsAddUpdate, TicketsEditAdapter } from "@/tickets/adapter/tickets.adapter";
+import {
+  TicketsAdapter,
+  TicketsAddUpdate,
+  TicketsEditAdapter,
+} from "@/tickets/adapter/tickets.adapter";
 import { TicketsConstants } from "@/tickets/constants";
 import { AddUpdateTickets } from "@/tickets/model/tickets.model";
+import { firebaseStore } from "@/firebase/config";
 
+const db = firebaseStore.firestore();
 class Tickets {
   /**
    * Gets all tickets
    */
   getTickets(): Promise<any> {
-    return Http.get(TicketsConstants.API_URL.TICKETS).then((ticketResponse) => {
-      return TicketsAdapter.toResponse(ticketResponse.data);
+    return db.collection(TicketsConstants.API_URL.TICKETS).get().then((response) => {
+      const ticketArr: any = [];
+      response.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        ticketArr.push(doc.data());
+      });
+      return TicketsAdapter.toResponse(ticketArr);
     });
+    
+    // return Http.get(TicketsConstants.API_URL.TICKETS).then((ticketResponse) => {
+    //   return TicketsAdapter.toResponse(ticketResponse.data);
+    // });
   }
 
   /**
@@ -35,9 +51,11 @@ class Tickets {
    * @param ticketId : Ticket ID
    */
   getTicketById(ticketId: any): Promise<any> {
-    return Http.get(`${TicketsConstants.API_URL.TICKETS}/${ticketId}`).then((editTicketResponse) => {
-      return TicketsEditAdapter.toResponse(editTicketResponse.data);
-    })
+    return Http.get(`${TicketsConstants.API_URL.TICKETS}/${ticketId}`).then(
+      (editTicketResponse) => {
+        return TicketsEditAdapter.toResponse(editTicketResponse.data);
+      }
+    );
   }
 
   /**
