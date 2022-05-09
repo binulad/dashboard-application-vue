@@ -3,6 +3,7 @@
     v-if="isShow"
     :taskListData="taskList"
     @updateTaskList="updateTaskList($event)"
+    @onDeleteTask="onDeleteTask($event)"
   />
 </template>
 
@@ -56,9 +57,17 @@ export default defineComponent({
       TaskServices.getTaskById(taskId).then((taskResponse) => {
         taskResponse.status = status;
         store.dispatch("updateTaskList", false);
-        TaskServices.updateTaskPosition(taskId, taskResponse).then(() => {
+        TaskServices.editTask(taskId, taskResponse).then(() => {
           store.dispatch("updateTaskList", true);
         });
+      });
+    },
+
+    // Delete Task
+    onDeleteTask(taskId: any) {
+      store.dispatch("updateTaskList", false);
+      TaskServices.deleteTask(taskId).then(() => {
+        store.dispatch("updateTaskList", true);
       });
     },
   },

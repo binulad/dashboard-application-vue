@@ -14,19 +14,9 @@ class Tickets {
    * Gets all tickets
    */
   getTickets(): Promise<any> {
-    return db.collection(TicketsConstants.API_URL.TICKETS).get().then((response) => {
-      const ticketArr: any = [];
-      response.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        ticketArr.push(doc.data());
-      });
-      return TicketsAdapter.toResponse(ticketArr);
+    return Http.get(TicketsConstants.API_URL.TICKETS).then((ticketResponse) => {
+      return TicketsAdapter.toResponse(ticketResponse.data);
     });
-    
-    // return Http.get(TicketsConstants.API_URL.TICKETS).then((ticketResponse) => {
-    //   return TicketsAdapter.toResponse(ticketResponse.data);
-    // });
   }
 
   /**
