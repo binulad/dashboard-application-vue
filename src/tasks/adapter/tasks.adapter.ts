@@ -1,5 +1,5 @@
 import { Adapter } from "@/adapter/adapter";
-import { EditTask, Task, TaskUpdate } from "@/tasks/model/tasks.model";
+import { EditTask, Task, TaskAddUpdate } from "@/tasks/model/tasks.model";
 
 class TaskAdapterObj implements Adapter<Task[]> {
   /**
@@ -27,13 +27,13 @@ class TaskAdapterObj implements Adapter<Task[]> {
 
 export const TaskAdapter = new TaskAdapterObj();
 
-class TaskUpdateAdapterObj implements Adapter<TaskUpdate> {
+class TaskAddUpdateAdapterObj implements Adapter<TaskAddUpdate> {
   /**
    * This will used to convert object into Task request object
    * @param task
    */
-  public toRequest(task: TaskUpdate): TaskUpdate {
-    const updatedTaskData: TaskUpdate = new TaskUpdate(
+  public toRequest(task: TaskAddUpdate): TaskAddUpdate {
+    const updatedTaskData: TaskAddUpdate = new TaskAddUpdate(
       task.taskName,
       task.taskDesc,
       task.assignee,
@@ -46,7 +46,7 @@ class TaskUpdateAdapterObj implements Adapter<TaskUpdate> {
   }
 }
 
-export const TaskUpdateAdapter = new TaskUpdateAdapterObj();
+export const TaskAddUpdateAdapter = new TaskAddUpdateAdapterObj();
 
 class TaskEditAdapterObj implements Adapter<EditTask> {
   /**

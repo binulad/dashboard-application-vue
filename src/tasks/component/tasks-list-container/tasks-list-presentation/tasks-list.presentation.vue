@@ -29,6 +29,7 @@
         :taskList="filterTasks(column.value)"
         :columnId="column.value"
         @taskListDetail="taskListDetail($event)"
+        @deleteTask="onDelete($event)"
       />
     </div>
   </div>
@@ -49,7 +50,7 @@ export default defineComponent({
     TasksCardPresentation,
   },
   props: ["taskListData"],
-  emits: ["updateTaskList"],
+  emits: ["updateTaskList", "onDeleteTask"],
   data() {
     return {
       columns: TaskConstants.STATUS,
@@ -110,6 +111,11 @@ export default defineComponent({
     taskListDetail(details: any) {
       this.$emit("updateTaskList", details);
     },
+
+    // Method called while click on Delete
+    onDelete(taskId: any) {
+      this.$emit("onDeleteTask", taskId)
+    }
   },
 });
 </script>
