@@ -2,6 +2,7 @@
   <TasksFormPresentation
     v-if="isEdit"
     :taskData="taskDetails"
+    :isShowStatus="isStatusSelected"
     @saveTaskData="onSubmitTask($event)"
   />
 </template>
@@ -22,12 +23,16 @@ export default defineComponent({
     return {
       taskDetails: new TaskAddUpdate(),
       isEdit: false,
+      isStatusSelected: false,
     };
   },
   computed: {
     id() {
       return this.$route.params.id;
     },
+    statusValue() {
+      return this.$route.params.statusValue;
+    }
   },
   created() {
     if (this.id) {
@@ -36,6 +41,10 @@ export default defineComponent({
         this.isEdit = true;
       });
     } else {
+      if(this.statusValue) {
+        this.taskDetails.status = Number.parseInt(`${this.statusValue}`);
+        this.isStatusSelected = true;
+      }
       this.isEdit = true;
     }
   },

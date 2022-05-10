@@ -49,6 +49,10 @@
   box-shadow: $box-shadow-sm;
   margin-bottom: 0.5rem;
 
+  &.drag-over {
+    border: 1px dashed $danger;
+  }
+
   &__list {
     list-style: none;
     padding: 0;
@@ -100,6 +104,12 @@
       border: 2px solid $white;
       border-radius: $border-radius-pill;
       background-color: $gray-400;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
 
       & + .user {
         margin-left: -10px;

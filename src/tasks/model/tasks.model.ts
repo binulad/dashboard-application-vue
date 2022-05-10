@@ -16,7 +16,7 @@ export class Task {
   id: number;
   taskName: string;
   taskDesc: string;
-  assignee: string;
+  assignee: string | string[];
   status: number;
   category: number;
   createdDate: string;
@@ -26,7 +26,7 @@ export class Task {
     id: number,
     taskName: string,
     taskDesc: string,
-    assignee: string,
+    assignee: string | string[],
     status: number,
     category: number,
     createdDate: string,
@@ -46,7 +46,7 @@ export class EditTask {
   public id: number;
   taskName: string;
   taskDesc: string;
-  assignee: string;
+  assignee: string | string[];
   status: number;
   category: number;
   createdDate: string;
@@ -56,7 +56,7 @@ export class EditTask {
     id: number,
     taskName: string,
     taskDesc: string,
-    assignee: string,
+    assignee: string | string[],
     status: number,
     category: number,
     createdDate: string,
@@ -75,7 +75,7 @@ export class EditTask {
 export class TaskAddUpdate {
   taskName?: string;
   taskDesc?: string;
-  assignee?: string;
+  assignee?: string | string[];
   status?: number;
   category?: string;
   createdDate?: string;
@@ -84,7 +84,7 @@ export class TaskAddUpdate {
   constructor(
     taskName?: string,
     taskDesc?: string,
-    assignee?: string,
+    assignee?: string | string[],
     status?: number,
     category?: string,
     createdDate?: string,
