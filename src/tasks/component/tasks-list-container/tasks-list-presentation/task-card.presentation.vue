@@ -17,7 +17,7 @@
       >
       <h4 class="task-item__title">{{ task.taskName }}</h4>
       <p class="task-item__desc">{{ task.taskDesc }}</p>
-      <ul class="task-item__users">
+      <ul class="task-item__users mb-2">
         <li
           class="user shadow"
           v-for="user in getUsers(task.assignee)"
@@ -27,6 +27,8 @@
           <img :src="getImage(user.image)" alt="User Image" />
         </li>
       </ul>
+      <p class="text-muted m-0 small text-end text-capitalize">Created By: {{task.createdBy}}</p>
+      <p class="text-muted m-0 small text-end text-capitalize">Updated On: {{task.createdDate}}</p>
 
       <!-- Task Action Dropdown -->
       <div
@@ -187,6 +189,7 @@ export default defineComponent({
       }
     },
 
+    // Method called while get the User Image
     getImage(image: any) {
       const images = require.context("@/assets/img", false, /\.jpg$/);
       return images("./" + image);

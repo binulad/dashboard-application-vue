@@ -82,11 +82,13 @@
     font-size: $font-size-base * 1.1;
     font-weight: $font-weight-medium;
     margin-bottom: 0.25rem;
+    word-break: break-word;
   }
 
   &__desc {
     color: $gray-600;
     margin-bottom: 0.5rem;
+    word-break: break-word;
   }
 
   &__users {
