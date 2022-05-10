@@ -39,6 +39,7 @@
               class="form-select"
               :class="{ 'is-invalid': errors.status }"
               v-model="taskDetails.status"
+              :disabled="isShowStatus"
             >
               <option value="" selected>Select Status</option>
               <option
@@ -105,34 +106,6 @@
           </div>
           <!-- End: Category -->
 
-          <!-- Assignee -->
-          <div class="col-lg-4 mb-3">
-            <label for="assignee" class="form-label">Assignee</label>
-            <Field
-              name="assignee"
-              id="assignee"
-              as="select"
-              class="form-select"
-              :class="{ 'is-invalid': errors.assignee }"
-              v-model="taskDetails.assignee"
-            >
-              <option value="" selected>Select Assignee</option>
-              <option
-                v-for="user in userList"
-                :key="user.name"
-                :value="user.value"
-              >
-                {{ user.name }}
-              </option>
-            </Field>
-            <ErrorMessage
-              name="assignee"
-              as="div"
-              class="invalid-feedback d-block"
-            />
-          </div>
-          <!-- End: Assignee -->
-
           <!-- Created By -->
           <div class="col-lg-4 mb-3">
             <label for="createdBy" class="form-label">Created By</label>
@@ -160,6 +133,37 @@
             />
           </div>
           <!-- End: Created By -->
+
+          <!-- Assignee -->
+          <div class="col-lg-4 mb-3">
+            <label for="assignee" class="form-label">Assignee</label>
+            <Field
+              name="assignee"
+              id="assignee"
+              as="select"
+              class="form-select"
+              multiple
+              :class="{ 'is-invalid': errors.assignee }"
+              v-model="taskDetails.assignee"
+              :disabled="!taskDetails.createdBy"
+            >
+              <option value="" selected>Select Assignee</option>
+              <option
+                v-for="user in userList"
+                :key="user.name"
+                :value="user.value"
+                :disabled="user.value == taskDetails.createdBy"
+              >
+                {{ user.name }}
+              </option>
+            </Field>
+            <ErrorMessage
+              name="assignee"
+              as="div"
+              class="invalid-feedback d-block"
+            />
+          </div>
+          <!-- End: Assignee -->
         </div>
       </div>
 
@@ -193,7 +197,6 @@
 import { defineComponent } from "vue";
 import { TaskConstants } from "@/tasks/constants";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import { TaskAddUpdate } from "@/tasks/model/tasks.model";
 import * as yup from "yup";
 
 export default defineComponent({
@@ -203,7 +206,7 @@ export default defineComponent({
     Field,
     ErrorMessage,
   },
-  props: ["taskData"],
+  props: ["taskData", "isShowStatus"],
   emits: ["saveTaskData"],
   data() {
     const schema = yup.object({
@@ -215,7 +218,7 @@ export default defineComponent({
         .required(TaskConstants.VALIDATION_MESSAGE.REQUIRED),
       status: yup.number().required(TaskConstants.VALIDATION_MESSAGE.REQUIRED),
       assignee: yup
-        .string()
+        .array()
         .required(TaskConstants.VALIDATION_MESSAGE.REQUIRED),
       category: yup
         .string()
@@ -241,7 +244,13 @@ export default defineComponent({
     // Method called while get today's Date
     getDate() {
       const today = new Date();
-      return today.getFullYear() +"-"+ (today.getMonth() + 1) +"-"+ today.getDate();
+      return (
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate()
+      );
     },
 
     // Method called while click on Save button

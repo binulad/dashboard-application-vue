@@ -19,13 +19,14 @@
           type="button"
           title="Add New"
           class="task-board__button ms-auto"
-          @click="addNewTask(index)"
+          @click="addNewTask(column.value)"
         >
           <span class="icon icon-add"></span>
         </button>
       </header>
 
       <TasksCardPresentation
+        v-if="isShow"
         :taskList="filterTasks(column.value)"
         :columnId="column.value"
         @taskListDetail="taskListDetail($event)"
@@ -55,6 +56,7 @@ export default defineComponent({
     return {
       columns: TaskConstants.STATUS,
       tasks: new Array<any>(),
+      isShow: false,
     };
   },
   created() {
@@ -69,6 +71,7 @@ export default defineComponent({
     // Load ListData
     loadListData(taskData: any) {
       this.tasks = taskData;
+      this.isShow = true;
     },
 
     // Method click while click on Add button
@@ -77,14 +80,16 @@ export default defineComponent({
     },
 
     // Method called while adding new Task
-    addNewTask(index: any) {
-      console.log(index);
+    addNewTask(columnValue: number) {
+      this.$router.push({
+        name: TaskConstants.ROUTE.ADD,
+        params: { statusValue: columnValue },
+      });
     },
 
     // Get filter tasks
     filterTasks(value: number) {
-      const taskArr = this.tasks.filter((item) => item.status == value);
-      return taskArr;
+      return this.tasks.filter((item) => item.status == value);
     },
 
     getStatus(data: number) {
@@ -114,8 +119,8 @@ export default defineComponent({
 
     // Method called while click on Delete
     onDelete(taskId: any) {
-      this.$emit("onDeleteTask", taskId)
-    }
+      this.$emit("onDeleteTask", taskId);
+    },
   },
 });
 </script>

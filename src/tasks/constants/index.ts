@@ -35,46 +35,46 @@ const TaskConstants = {
   ],
   TASK_CATEGORY: [
     {
-      name: "research",
+      name: "Research",
       value: 1
     },
     {
-      name: "planning",
+      name: "Planning",
       value: 2
     },
     {
-      name: "design",
+      name: "Design",
       value: 3
     },
     {
-      name: "content",
+      name: "Content",
       value: 4
     },
   ],
   USERS: [
     {
       name: "Heny",
-      image: "https://unsplash.com/photos/WNoLnJo7tS8",
+      image: "user1.jpg",
       value: "heny",
     },
     {
       name: "Meera",
-      image: "https://unsplash.com/photos/TJDvP6xm2Eo",
+      image: "user2.jpg",
       value: "meera",
     },
     {
       name: "Riya",
-      image: "https://unsplash.com/photos/xPTFWp2NnLM",
+      image: "user3.jpg",
       value: "riya",
     },
     {
       name: "Jisa",
-      image: "https://unsplash.com/photos/rIl4qosDTaM",
+      image: "user1.jpg",
       value: "jisa",
     },
     {
       name: "Jiya",
-      image: "https://unsplash.com/photos/T7dkqIcBa38",
+      image: "user3.jpg",
       value: "jiya",
     },
   ],

@@ -18,8 +18,14 @@
       <h4 class="task-item__title">{{ task.taskName }}</h4>
       <p class="task-item__desc">{{ task.taskDesc }}</p>
       <ul class="task-item__users">
-        <li class="user"></li>
-        <li class="user"></li>
+        <li
+          class="user shadow"
+          v-for="user in getUsers(task.assignee)"
+          :key="user.value"
+          :title="user.name"
+        >
+          <img :src="getImage(user.image)" alt="User Image" />
+        </li>
       </ul>
 
       <!-- Task Action Dropdown -->
@@ -75,10 +81,16 @@ export default defineComponent({
       dropdownIndex: 0,
       isShowDropdown: false,
       dropdownRef: HTMLElement as any,
+      userList: TaskConstants.USERS,
     };
   },
   created() {
     this.taskData = this.taskList;
+  },
+  watch: {
+    taskList(newValue) {
+      this.taskData = newValue;
+    },
   },
   mounted() {
     // Event listener for close the dropdown on outside click
@@ -103,6 +115,7 @@ export default defineComponent({
         taskId: taskId,
         columnId: columnId,
       };
+
       this.$emit("taskListDetail", taskObj);
     },
 
@@ -123,7 +136,7 @@ export default defineComponent({
           name = TaskConstants.TASK_CATEGORY[3].name;
           break;
       }
-      return name;
+      return name?.toLowerCase();
     },
 
     // Open Dropdown
@@ -148,16 +161,36 @@ export default defineComponent({
 
     // Method called while edit task
     onEdit(taskId: any) {
-      this.$router.push({
-        name: TaskConstants.ROUTE.EDIT,
-        params: { id: taskId },
-      });
+      setTimeout(() => {
+        this.$router.push({
+          name: TaskConstants.ROUTE.EDIT,
+          params: { id: taskId },
+        });
+      }, 100);
     },
 
     // Method called while click on delete
     onDelete(taskId: any) {
       this.$emit("deleteTask", taskId);
-    }
+    },
+
+    // Method called while get User Image
+    getUsers(userName: any) {
+      if (Array.isArray(userName)) {
+        let userArr: any[] = [];
+        userName.forEach((name: any) => {
+          userArr.push(this.userList.find((user: any) => user.value == name));
+        });
+        return userArr;
+      } else {
+        return this.userList.filter((user: any) => user.value == userName);
+      }
+    },
+
+    getImage(image: any) {
+      const images = require.context("@/assets/img", false, /\.jpg$/);
+      return images("./" + image);
+    },
   },
 });
 </script>
