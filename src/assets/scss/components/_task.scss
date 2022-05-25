@@ -42,11 +42,16 @@
 
 // Task List
 .task-item {
+  position: relative;
   background-color: $white;
   padding: 1rem;
   border-radius: $border-radius;
   box-shadow: $box-shadow-sm;
   margin-bottom: 0.5rem;
+
+  &.drag-over {
+    border: 1px dashed $danger;
+  }
 
   &__list {
     list-style: none;
@@ -69,7 +74,7 @@
       &.bg-#{$color} {
         background-color: $value;
         color: color-contrast($value);
-      } 
+      }
     }
   }
 
@@ -77,11 +82,13 @@
     font-size: $font-size-base * 1.1;
     font-weight: $font-weight-medium;
     margin-bottom: 0.25rem;
+    word-break: break-word;
   }
 
   &__desc {
     color: $gray-600;
     margin-bottom: 0.5rem;
+    word-break: break-word;
   }
 
   &__users {
@@ -99,10 +106,28 @@
       border: 2px solid $white;
       border-radius: $border-radius-pill;
       background-color: $gray-400;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
 
       & + .user {
         margin-left: -10px;
       }
+    }
+  }
+
+  &__action {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    .btn-link {
+      font-size: $font-size-base * 1.2;
+      text-decoration: none;
+      color: $gray-600;
     }
   }
 }

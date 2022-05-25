@@ -83,58 +83,81 @@
   ],
   "tasks": [
     {
-      "title": "Research",
-      "task": [
-        {
-          "id": 1,
-          "taskName": "Task 1",
-          "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          "assignee": "User 1",
-          "category": "research",
-          "createdDate": "2022-04-21",
-          "createdBy": "Binal Lad"
-        },
-        {
-          "id": 2,
-          "taskName": "Task 2",
-          "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          "assignee": "User 2",
-          "category": "planning",
-          "createdDate": "2022-04-21",
-          "createdBy": "Binal Lad"
-        }
-      ]
+      "taskName": "Task 5",
+      "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "assignee": "heny",
+      "status": 2,
+      "category": 3,
+      "createdDate": "2022-5-8",
+      "createdBy": "riya",
+      "id": 5
     },
     {
-      "title": "Todo",
-      "task": [
-        {
-          "id": 3,
-          "taskName": "Task 3",
-          "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          "assignee": "User 3",
-          "category": "design",
-          "createdDate": "2022-04-21",
-          "createdBy": "Binal Lad"
-        },
-        {
-          "id": 4,
-          "taskName": "Task 4",
-          "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          "assignee": "User 4",
-          "category": "research",
-          "createdDate": "2022-04-21",
-          "createdBy": "Binal Lad"
-        }
-      ]
+      "taskName": "Task 1",
+      "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "assignee": "meera",
+      "status": 3,
+      "category": 4,
+      "createdDate": "2022-5-8",
+      "createdBy": "jiya",
+      "id": 8
     },
     {
-      "title": "In Progress",
-      "task": []
+      "taskName": "Task 1",
+      "taskDesc": "test desc",
+      "assignee": "meera",
+      "status": 4,
+      "category": 3,
+      "createdDate": "2022-5-10",
+      "createdBy": "meera",
+      "id": 9
     },
     {
-      "title": "Needs Review",
-      "task": []
+      "taskName": "Task 12",
+      "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "assignee": "jiya",
+      "status": 4,
+      "category": 2,
+      "createdDate": "2022-5-10",
+      "createdBy": "heny",
+      "id": 12
+    },
+    {
+      "taskName": "Task 14",
+      "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "assignee": "jisa",
+      "status": 2,
+      "category": 4,
+      "createdDate": "2022-5-10",
+      "createdBy": "meera",
+      "id": 14
+    },
+    {
+      "taskName": "Task 11",
+      "taskDesc": "Testing",
+      "assignee": [
+        "heny",
+        "meera",
+        "riya"
+      ],
+      "status": 3,
+      "category": 2,
+      "createdDate": "2022-5-10",
+      "createdBy": "jisa",
+      "id": 16
+    },
+    {
+      "taskName": "Task 15",
+      "taskDesc": "test",
+      "assignee": [
+        "heny",
+        "riya"
+      ],
+      "status": 1,
+      "category": 3,
+      "createdDate": "2022-5-10",
+      "createdBy": "meera",
+      "id": 17
     }
   ],
   "products": [

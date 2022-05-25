@@ -5,13 +5,20 @@ export enum Status {
   NeedReview = 4,
 }
 
+export enum Category {
+  Research = 1,
+  Planning = 2,
+  Design = 3,
+  Content = 4,
+}
+
 export class Task {
   id: number;
   taskName: string;
   taskDesc: string;
-  assignee: string;
+  assignee: string | string[];
   status: number;
-  category: string;
+  category: number;
   createdDate: string;
   createdBy: string;
 
@@ -19,9 +26,9 @@ export class Task {
     id: number,
     taskName: string,
     taskDesc: string,
-    assignee: string,
+    assignee: string | string[],
     status: number,
-    category: string,
+    category: number,
     createdDate: string,
     createdBy: string
   ) {
@@ -39,9 +46,9 @@ export class EditTask {
   public id: number;
   taskName: string;
   taskDesc: string;
-  assignee: string;
+  assignee: string | string[];
   status: number;
-  category: string;
+  category: number;
   createdDate: string;
   createdBy: string;
 
@@ -49,9 +56,9 @@ export class EditTask {
     id: number,
     taskName: string,
     taskDesc: string,
-    assignee: string,
+    assignee: string | string[],
     status: number,
-    category: string,
+    category: number,
     createdDate: string,
     createdBy: string
   ) {
@@ -65,30 +72,30 @@ export class EditTask {
     this.createdBy = createdBy;
   }
 }
-export class TaskUpdate {
-  taskName: string;
-  taskDesc: string;
-  assignee: string;
-  status: number;
-  category: string;
-  createdDate: string;
-  createdBy: string;
+export class TaskAddUpdate {
+  taskName?: string;
+  taskDesc?: string;
+  assignee?: string | string[];
+  status?: number;
+  category?: string;
+  createdDate?: string;
+  createdBy?: string;
 
   constructor(
-    taskName: string,
-    taskDesc: string,
-    assignee: string,
-    status: number,
-    category: string,
-    createdDate: string,
-    createdBy: string
+    taskName?: string,
+    taskDesc?: string,
+    assignee?: string | string[],
+    status?: number,
+    category?: string,
+    createdDate?: string,
+    createdBy?: string
   ) {
-    this.taskName = taskName;
-    this.taskDesc = taskDesc;
-    this.assignee = assignee;
+    this.taskName = taskName || "";
+    this.taskDesc = taskDesc || "";
+    this.assignee = assignee || "";
     this.status = status;
-    this.category = category;
-    this.createdDate = createdDate;
-    this.createdBy = createdBy;
+    this.category = category || "";
+    this.createdDate = createdDate || "";
+    this.createdBy = createdBy || "";
   }
 }

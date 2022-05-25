@@ -3,6 +3,7 @@
     v-if="isShow"
     :taskListData="taskList"
     @updateTaskList="updateTaskList($event)"
+    @onDeleteTask="onDeleteTask($event)"
   />
 </template>
 
@@ -50,15 +51,20 @@ export default defineComponent({
 
     // Update Task List while Drag and Drop Task
     updateTaskList(taskDetail: any) {
-      const taskId = taskDetail.taskId;
-      const status = taskDetail.columnId;
-
-      TaskServices.getTaskById(taskId).then((taskResponse) => {
-        taskResponse.status = status;
+      TaskServices.getTaskById(taskDetail.taskId).then((taskResponse) => {
+        taskResponse.status = taskDetail.columnId;
         store.dispatch("updateTaskList", false);
-        TaskServices.updateTaskPosition(taskId, taskResponse).then(() => {
+        TaskServices.editTask(taskDetail.taskId, taskResponse).then(() => {
           store.dispatch("updateTaskList", true);
         });
+      });
+    },
+
+    // Delete Task
+    onDeleteTask(taskId: any) {
+      store.dispatch("updateTaskList", false);
+      TaskServices.deleteTask(taskId).then(() => {
+        store.dispatch("updateTaskList", true);
       });
     },
   },
