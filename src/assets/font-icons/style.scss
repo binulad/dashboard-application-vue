@@ -132,3 +132,23 @@
     content: $icon-gear; 
   }
 }
+.icon-shopping_cart {
+  &:before {
+    content: $icon-shopping_cart; 
+  }
+}
+.icon-shopping_bag {
+  &:before {
+    content: $icon-shopping_bag; 
+  }
+}
+.icon-star {
+  &:before {
+    content: $icon-star; 
+  }
+}
+.icon-star_outline {
+  &:before {
+    content: $icon-star_outline; 
+  }
+}

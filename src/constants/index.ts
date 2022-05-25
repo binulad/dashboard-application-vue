@@ -15,6 +15,11 @@ const Constants = {
       to: "/tickets",
       class: "icon icon-ticket"
     },
+    {
+      name: "Products",
+      to: "/products",
+      class: "icon icon-shopping_bag"
+    },
   ],
   SORT_DIRECTION: {
     ASCENDING: "asc",

@@ -6,9 +6,6 @@ import {
 } from "@/tickets/adapter/tickets.adapter";
 import { TicketsConstants } from "@/tickets/constants";
 import { AddUpdateTickets } from "@/tickets/model/tickets.model";
-import { firebaseStore } from "@/firebase/config";
-
-const db = firebaseStore.firestore();
 class Tickets {
   /**
    * Gets all tickets

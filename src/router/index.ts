@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import TicketsRoutes from "@/tickets/router";
 import DashboardRoutes from "@/dashboard/router";
 import TasksRoutes from "@/tasks/router";
+import ProductsRoutes from "@/products/router";
 
 const AppShell = () =>
   import(/* webpackChunkName: "App Shell" */ "@/components/AppShell.vue");
@@ -16,6 +17,10 @@ const Tickets = () =>
 const Tasks = () =>
   import(
     /* webpackChunkName: "Tasks" */ "@/tasks/component/tasks-container/tasks.container.vue"
+  );
+const Products = () =>
+  import(
+    /* webpackChunkName: "Products" */ "@/products/components/products-container/products.container.vue"
   );
 
 const appShellRoutes = [
@@ -39,6 +44,13 @@ const appShellRoutes = [
     component: Tasks,
     children: TasksRoutes,
     meta: { pageTitle: "Tasks", breadcrumb: [{name: "Tasks"}] },
+  },
+  {
+    path: "/products",
+    name: "Products",
+    component: Products,
+    children: ProductsRoutes,
+    meta: { pageTitle: "Products", breadcrumb: [{name: "Products"}] },
   },
 ];
 
