@@ -6,12 +6,23 @@ const productsForm = () =>
   import(
     /* webpackChunkName: "productsForm" */ "@/products/components/products-form-container/products-form.container.vue"
   );
+const productsDetail = () =>
+  import(
+    /* webpackChunkName: "productsDetail" */ "@/products/components/products-description-container/products-description.container.vue"
+  );
 
 const ProductsRoutes = [
   {
     path: "",
     name: "Product Listing",
     component: productsList,
+    children: [
+      {
+        path: ":id",
+        name: "View Product",
+        component: productsDetail,
+      },
+    ]
   },
   {
     path: "add",

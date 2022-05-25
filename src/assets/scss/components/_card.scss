@@ -51,7 +51,6 @@
   }
 }
 
-
 // Product Card
 .product {
   &__container {
@@ -97,5 +96,34 @@
 
   &__rating {
     margin: 0;
+  }
+
+  // Product Details
+  &-detail__container {
+    display: grid;
+    grid-template-columns: 40% auto;
+    column-gap: 30px;
+  }
+
+  &-img {
+    max-width: 270px;
+    margin: auto;
+  }
+
+  &-desc {
+    color: $text-muted;
+  }
+
+  &-rating {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid $border-color;
+    padding: 2px 8px;
+    font-size: $font-size-base * 0.875;
+  }
+
+  &-price {
+    font-size: $font-size-base * 1.2;
+    font-weight: $font-weight-bold;
   }
 }

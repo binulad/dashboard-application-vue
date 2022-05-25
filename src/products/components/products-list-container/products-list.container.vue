@@ -18,7 +18,7 @@ export default defineComponent({
   data() {
     return {
       productList: new Array<Products>(),
-      isShow: false
+      isShow: false,
     };
   },
   created() {

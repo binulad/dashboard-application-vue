@@ -1,3 +1,4 @@
+import { EditProducts } from "./../model/products.model";
 import { Adapter } from "@/adapter/adapter";
 import { Products } from "@/products/model/products.model";
 
@@ -28,3 +29,26 @@ class ProductAdapterObj implements Adapter<Products[]> {
 }
 
 export const ProductAdapter = new ProductAdapterObj();
+
+class ProductEditAdapterObj implements Adapter<EditProducts> {
+  /**
+   * This will convert the response into Product object
+   * @param data
+   */
+
+  public toResponse(data: EditProducts): EditProducts {
+    const editProductData: EditProducts = new EditProducts(
+      data.id,
+      data.title,
+      data.price,
+      data.description,
+      data.category,
+      data.image,
+      data.rating
+    );
+
+    return editProductData;
+  }
+}
+
+export const ProductEditAdapter = new ProductEditAdapterObj();
