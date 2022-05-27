@@ -2,7 +2,23 @@
   <template v-if="!showProductDetail">
     <!-- Table Action Content -->
     <TableActionContent>
-      <button type="button" class="btn btn-primary">Add Product</button>
+      <!-- Product Cart -->
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-primary"
+          title="Cart"
+          @click="openDropdown()"
+        >
+          <span class="icon icon-shopping_cart"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" :class="{'show' : isOpenDropdown}" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+      <!-- End: Product Cart -->
     </TableActionContent>
     <!-- End: Table Action Content -->
 
@@ -68,10 +84,12 @@ export default defineComponent({
     Vue3StarRatings,
   },
   props: ["products"],
+  emits: ['onTitleClick'],
   data() {
     return {
       productList: new Array<Products>(),
       showProductDetail: false,
+      isOpenDropdown: false
     };
   },
   computed: {
@@ -89,16 +107,36 @@ export default defineComponent({
     },
   },
   created() {
+    if (this.id) {
+      this.openProductDetail(this.id);
+      this.showProductDetail = true;
+    }
     this.productList = this.products;
   },
   methods: {
     // Method called while click on Product Title
     onClickTitle(productId: any) {
       this.showProductDetail = true;
+      this.openProductDetail(productId);
+      this.$emit("onTitleClick", false);
+    },
+
+    // Method called to open Product Details Page
+    openProductDetail(productId: any) {
       this.$router.push({
         name: ProductConstants.ROUTE.DETAILS,
         params: { id: productId },
       });
+    },
+
+    // Method called while click on Add Product button
+    addProduct() {
+      this.$router.push({ name: ProductConstants.ROUTE.ADD });
+    },
+
+    // MEthod called while click on Cart button
+    openDropdown() {
+      this.isOpenDropdown = !this.isOpenDropdown;
     },
   },
 });

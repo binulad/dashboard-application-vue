@@ -28,38 +28,56 @@ export class Products {
 
 export class EditProducts {
   public id: number;
-  title?: string;
-  price?: number;
-  description?: string;
-  category?: string;
-  image?: string;
-  rating?: Rating;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
 
   constructor(
     id: number,
+    title: string,
+    price: number,
+    description: string,
+    image: string,
+    category: string,
+  ) {
+    this.id = id;
+    this.title = title;
+    this.price = price;
+    this.description = description;
+    this.image = image;
+    this.category = category;
+  }
+}
+export class AddProducts {
+  title?: string;
+  price?: number;
+  description?: string;
+  image?: string;
+  category?: string;
+
+  constructor(
     title?: string,
     price?: number,
     description?: string,
-    category?: string,
     image?: string,
-    rating?: Rating
+    category?: string,
   ) {
-    this.id = id;
     this.title = title || "";
     this.price = price;
     this.description = description || "";
-    this.category = category || "";
     this.image = image || "";
-    this.rating = rating;
+    this.category = category || "";
   }
 }
 
 export class Rating {
-  rate: number;
-  count: number;
+  rate?: number;
+  count?: number;
 
-  constructor(rate: number, count: number) {
-    this.rate = rate;
-    this.count = count;
+  constructor(rate?: number, count?: number) {
+    this.rate = rate || 0;
+    this.count = count || 0;
   }
 }
