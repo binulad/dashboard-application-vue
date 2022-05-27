@@ -12,7 +12,7 @@
         <p class="product-desc">{{productDetail.description}}</p>
         <div class="product-rating">
           <span class="product-rate">{{productDetail.rating.rate}}</span>
-          <span class="icon icon-star ms-1"></span>
+          <span class="icon icon-star text-warning ms-1"></span>
           <span class="vr mx-2"></span>
           <span class="product-count">{{productDetail.rating.count}} Ratings</span>
         </div>

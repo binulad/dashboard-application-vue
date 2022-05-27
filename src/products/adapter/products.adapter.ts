@@ -1,4 +1,4 @@
-import { EditProducts } from "./../model/products.model";
+import { AddProducts, EditProducts } from "./../model/products.model";
 import { Adapter } from "@/adapter/adapter";
 import { Products } from "@/products/model/products.model";
 
@@ -42,9 +42,8 @@ class ProductEditAdapterObj implements Adapter<EditProducts> {
       data.title,
       data.price,
       data.description,
-      data.category,
       data.image,
-      data.rating
+      data.category,
     );
 
     return editProductData;
@@ -52,3 +51,23 @@ class ProductEditAdapterObj implements Adapter<EditProducts> {
 }
 
 export const ProductEditAdapter = new ProductEditAdapterObj();
+
+class ProductAddAdapterObj implements Adapter<AddProducts> {
+  /**
+   * This will used to convert object into Product request object
+   * @param product
+   */
+  public toRequest(product: AddProducts): AddProducts {
+    const productData: AddProducts = new AddProducts(
+      product.title,
+      product.price,
+      product.description,
+      product.image,
+      product.category,
+    );
+
+    return productData;
+  }
+}
+
+export const ProductAddAdapter = new ProductAddAdapterObj();
