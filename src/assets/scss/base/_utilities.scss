@@ -1,0 +1,17 @@
+$custom-utilities: (
+  "position": (
+    property: position,
+    values: static relative absolute fixed sticky
+  ),
+  "top": (
+    property: top,
+    values: $position-values
+  )
+);
+
+@each $key, $utility in $custom-utilities {
+  @debug type-of($utility);
+  @if type-of($utility) == "map" {
+    @include generate-custom-utilities($utility);
+  }
+}

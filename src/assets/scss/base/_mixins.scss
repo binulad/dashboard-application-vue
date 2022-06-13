@@ -1,0 +1,19 @@
+// Utilities Mixin
+@mixin generate-custom-utilities($utilities) {
+  $property: map-get($utilities , property);
+  $values: map-get($utilities, values);
+ 
+  @if type-of($values) == "map" {
+    @each $key, $value in $values {
+      .custom-#{$property}-#{$key} {
+        #{$property}: $value;
+      }
+    }
+  } @else {
+    @each $name in $values {
+      .custom-#{$property}-#{$name} {
+        #{$property}: $name;
+      }
+    }
+  }
+}

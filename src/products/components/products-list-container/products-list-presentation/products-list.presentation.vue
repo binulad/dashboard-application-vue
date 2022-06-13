@@ -1,27 +1,11 @@
 <template>
-  <template v-if="!showProductDetail">
-    <!-- Table Action Content -->
-    <TableActionContent>
-      <!-- Product Cart -->
-      <div class="dropdown">
-        <button
-          type="button"
-          class="btn btn-primary"
-          title="Cart"
-          @click="openDropdown()"
-        >
-          <span class="icon icon-shopping_cart"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end" :class="{'show' : isOpenDropdown}" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-      <!-- End: Product Cart -->
-    </TableActionContent>
-    <!-- End: Table Action Content -->
-
+  <div class="d-flex flex-column h-100 overflow-hidden" v-if="!showProductDetail">
+    <!-- Product Category -->
+    <ProductsCategoryPresentation
+      :categories="categories"
+      @currentCategory="onClickCategory($event)"
+    />
+    <!-- End: Product Category -->
     <!-- Product listing -->
     <div class="d-flex flex-column h-100 overflow-auto">
       <ul class="product__container m-0 p-0">
@@ -66,7 +50,7 @@
       </ul>
     </div>
     <!-- End: Product listing -->
-  </template>
+  </div>
   <router-view />
 </template>
 
@@ -74,22 +58,22 @@
 import { defineComponent } from "vue";
 import { ProductConstants } from "@/products/constants";
 import { Products } from "@/products/model/products.model";
-import TableActionContent from "@/components/TableActionContent.vue";
 import Vue3StarRatings from "vue3-star-ratings";
+import ProductsCategoryPresentation from "@/products/components/products-list-container/product-category-presentation/product-category.presentation.vue";
 
 export default defineComponent({
   name: ProductConstants.NAME.PRODUCTS_LIST_PRESENTATION,
   components: {
-    TableActionContent,
     Vue3StarRatings,
+    ProductsCategoryPresentation
   },
-  props: ["products"],
-  emits: ['onTitleClick'],
+  props: ["products", "categories"],
+  emits: ["onTitleClick", "clickCategory"],
   data() {
     return {
       productList: new Array<Products>(),
       showProductDetail: false,
-      isOpenDropdown: false
+      isGetAllCategory: false,
     };
   },
   computed: {
@@ -103,6 +87,11 @@ export default defineComponent({
         this.showProductDetail = true;
       } else {
         this.showProductDetail = false;
+      }
+    },
+    products(newValue) {
+      if (newValue) {
+        this.productList = newValue;
       }
     },
   },
@@ -134,9 +123,11 @@ export default defineComponent({
       this.$router.push({ name: ProductConstants.ROUTE.ADD });
     },
 
-    // MEthod called while click on Cart button
-    openDropdown() {
-      this.isOpenDropdown = !this.isOpenDropdown;
+    // Get Category data based on selection
+    onClickCategory(categoryName: string) {
+      console.log("categoryName",categoryName);
+      
+      this.$emit("clickCategory", categoryName)
     },
   },
 });

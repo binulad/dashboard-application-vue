@@ -1,0 +1,10 @@
+$custom-utilities: (
+  "position": (
+    property: position,
+    values: static relative absolute fixed sticky
+  ),
+  "top": (
+    property: top,
+    values: $position-values
+  )
+);

@@ -1,9 +1,4 @@
-import {
-  ProductAdapter,
-  ProductAddAdapter,
-  ProductEditAdapter,
-} from "./../adapter/products.adapter";
-import { Http } from "@/services/http-client";
+import { ProductAdapter } from "./../adapter/products.adapter";
 import { ProductConstants } from "../constants";
 
 const apiBaseURL = "https://fakestoreapi.com";

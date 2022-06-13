@@ -8,6 +8,8 @@ const ProductConstants = {
     PRODUCTS_DESCRIPTION_CONTAINER: "ProductsDescriptionContainer",
     PRODUCTS_DESCRIPTION_PRESENTATION: "ProductsDescriptionPresentation",
     PRODUCTS_CATEGORY_PRESENTATION: "ProductsCategoryPresentation",
+    PRODUCTS_CART_CONTAINER: "ProductsCartContainer",
+    PRODUCTS_CART_PRESENTATION: "ProductsCartPresentation",
   },
   API_URL: {
     PRODUCTS: "products",

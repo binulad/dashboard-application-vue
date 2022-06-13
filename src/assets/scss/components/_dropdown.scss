@@ -7,3 +7,32 @@
     }
   }
 }
+
+// Cart Dropdown
+.cart {
+  &__dropdown {
+    max-width: 500px;
+  }
+  &__product-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+  }
+
+  &__product-title {
+    font-size: $font-size-base;
+  }
+
+  &__product-desc {
+    @include text-truncate;
+    display: inline-block;
+    width: 100%;
+    color: $text-muted;
+  }
+
+  &__product-price {
+    font-weight: $font-weight-bold;
+  }
+}

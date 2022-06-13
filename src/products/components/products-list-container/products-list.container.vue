@@ -1,12 +1,20 @@
 <template>
-  <div class="d-flex flex-column h-100 overflow-hidden">
-    <!-- Product Category -->
-    <ProductsCategoryPresentation v-if="isGetAllCategory" :categories="productCategories" @currentCategory="onClickCategory($event)" />
-    <!-- End: Product Category -->
+  <!-- Table Action Content -->
+  <TableActionContent>
+    <!-- Product Cart -->
+    <!-- <CartContainer /> -->
+    <!-- Product Cart -->
+  </TableActionContent>
+  <!-- End: Table Action Content -->
 
-    <!-- Product List -->
-    <ProductsListPresentation v-if="isShow" :products="productList" @onTitleClick="onTitleClick($event)" />
-  </div>
+  <!-- Product List -->
+  <ProductsListPresentation
+    v-if="isShow"
+    :products="productList"
+    :categories="productCategories"
+    @onTitleClick="onTitleClick($event)"
+    @clickCategory="onClickCategory($event)"
+  />
 </template>
 
 <script lang="ts">
@@ -15,67 +23,71 @@ import { ProductConstants } from "@/products/constants";
 import ProductsListPresentation from "@/products/components/products-list-container/products-list-presentation/products-list.presentation.vue";
 import { ProductServices } from "@/products/services/products.service";
 import { Products } from "@/products/model/products.model";
-import ProductsCategoryPresentation from "@/products/components/products-list-container/product-category-presentation/product-category.presentation.vue";
+import TableActionContent from "@/components/TableActionContent.vue";
+import CartContainer from "@/cart/component/cart-container/cart.container.vue";
 
 export default defineComponent({
   name: ProductConstants.NAME.PRODUCTS_LIST_CONTAINER,
   components: {
     ProductsListPresentation,
-    ProductsCategoryPresentation,
+    TableActionContent,
+    // CartContainer,
   },
   data() {
     return {
       productList: new Array<Products>(),
       isShow: false,
       productCategories: new Array<any>(),
-      isGetAllCategory: false,
     };
   },
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+  },
   created() {
-    this.loadProducts();
     this.loadAllCategories();
+    this.loadProducts();
   },
   methods: {
     // Method called for Get Products List
-    loadProducts() {
-      ProductServices.getProducts().then((response) => {
+    async loadProducts() {
+      await ProductServices.getProducts().then((response) => {
         this.productList = response;
         this.isShow = true;
       });
     },
 
     // Method called while get all the categories
-    loadAllCategories() {
-      ProductServices.getAllCategories().then((response) => {
+    async loadAllCategories() {
+      await ProductServices.getAllCategories().then((response) => {
         this.productCategories = response;
-        this.isGetAllCategory = true;
       });
     },
 
-    // Called while get Cart Products
-    getCartLimitedData() {
-      ProductServices.getLimitedCardProduct(5).then((response) => {
-        console.log(response);
-      });
+    // Get Products By Category
+    async productsByCategory(categoryName: string) {
+      await ProductServices.getProductsByCategory(categoryName).then(
+        (response) => {
+          this.productList = response;
+          this.isShow = true;
+        }
+      );
     },
 
     // Get Category data based on selection
-    onClickCategory(categoryName: string) {
-      this.isShow = false;
-      if(categoryName == "all") {
+    onClickCategory(categoryName: any) {
+      if (categoryName == "all") {
         this.loadProducts();
       } else {
-        ProductServices.getProductsByCategory(categoryName).then((response) => {
-          this.productList = response;
-          this.isShow = true;
-        })
+        this.productsByCategory(categoryName);
       }
     },
 
     // MEthod called while click on Product Title
     onTitleClick(value: boolean) {
-      this.isGetAllCategory = value;
-    }
+      console.log(value);
+    },
   },
 });
 </script>

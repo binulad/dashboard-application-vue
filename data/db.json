@@ -83,20 +83,10 @@
   ],
   "tasks": [
     {
-      "taskName": "Task 5",
-      "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      "assignee": "heny",
-      "status": 2,
-      "category": 3,
-      "createdDate": "2022-5-8",
-      "createdBy": "riya",
-      "id": 5
-    },
-    {
       "taskName": "Task 1",
       "taskDesc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "assignee": "meera",
-      "status": 3,
+      "status": 2,
       "category": 4,
       "createdDate": "2022-5-8",
       "createdBy": "jiya",
@@ -106,7 +96,7 @@
       "taskName": "Task 1",
       "taskDesc": "test desc",
       "assignee": "meera",
-      "status": 4,
+      "status": 3,
       "category": 3,
       "createdDate": "2022-5-10",
       "createdBy": "meera",
